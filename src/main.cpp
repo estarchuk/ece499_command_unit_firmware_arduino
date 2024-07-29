@@ -111,7 +111,7 @@ void gpio_setup(){
   pinMode(nozzle_1, OUTPUT);
   pinMode(nozzle_2, OUTPUT);
   pinMode(nozzle_3, OUTPUT);
-  pinMode(button, INPUT);
+  pinMode(button, INPUT_PULLUP);
   Wire.begin(lcd_sda, lcd_scl);
   encoder = new RotaryEncoder(encoder_b, encoder_a, RotaryEncoder::LatchMode::FOUR0); 
 }
@@ -121,7 +121,7 @@ void uart_setup(){
 }
 
 void interrupt_setup(){
-  attachInterrupt(digitalPinToInterrupt(button), _button_isr, LOW);
+  attachInterrupt(digitalPinToInterrupt(button), _button_isr, ONLOW);
   attachInterrupt(digitalPinToInterrupt(encoder_b), checkPosition, CHANGE);
   attachInterrupt(digitalPinToInterrupt(encoder_a), checkPosition, CHANGE);
 }
